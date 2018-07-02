@@ -75,7 +75,7 @@ wget -O $tmphtml 'http://releases.ubuntu.com/' >/dev/null 2>&1
 prec=$(fgrep Precise $tmphtml | head -1 | awk '{print $3}')
 trus=$(fgrep Trusty $tmphtml | head -1 | awk '{print $3}')
 xenn=$(fgrep Xenial $tmphtml | head -1 | awk '{print $3}')
-
+bion=$(fgrep Bionic $tmphtml | head -1 | awk '{print $3}')
 
 
 # ask whether to include vmware tools or not
@@ -85,8 +85,9 @@ while true; do
     echo "  [1] Ubuntu $prec LTS Server amd64 - Precise Pangolin"
     echo "  [2] Ubuntu $trus LTS Server amd64 - Trusty Tahr"
     echo "  [3] Ubuntu $xenn LTS Server amd64 - Xenial Xerus"
+	echo "  [4] Ubuntu $bion LTS Server amd64 - Bionic Beaver"
     echo
-    read -p " please enter your preference: [1|2|3]: " ubver
+    read -p " please enter your preference: [1|2|3|4]: " ubver
     case $ubver in
         [1]* )  download_file="ubuntu-$prec-server-amd64.iso"           # filename of the iso to be downloaded
                 download_location="http://releases.ubuntu.com/$prec/"     # location of the file to be downloaded
@@ -99,6 +100,10 @@ while true; do
         [3]* )  download_file="ubuntu-$xenn-server-amd64.iso"
                 download_location="http://releases.ubuntu.com/$xenn/"
                 new_iso_name="ubuntu-$xenn-server-amd64-unattended.iso"
+                break;;
+		[4]* )  download_file="ubuntu-$bion-server-amd64.iso"
+                download_location="http://releases.ubuntu.com/$bion/"
+                new_iso_name="ubuntu-$bion-server-amd64-unattended.iso"
                 break;;
         * ) echo " please answer [1], [2] or [3]";;
     esac
@@ -115,7 +120,7 @@ fi
 
 # ask the user questions about his/her preferences
 read -ep " please enter your preferred timezone: " -i "${timezone}" timezone
-read -ep " please enter your preferred username: " -i "netson" username
+read -ep " please enter your preferred username: " -i "johan" username
 read -sp " please enter your preferred password: " password
 printf "\n"
 read -sp " confirm your preferred password: " password2
